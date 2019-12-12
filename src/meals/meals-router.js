@@ -14,7 +14,7 @@ const serializeMeal = meal => ({
   date_went: meal.date_went,
   city: meal.city,
   rating: meal.rating,
-  comments: meal.rating
+  comments: meal.comments
 });
 
 mealsRouter
@@ -50,12 +50,23 @@ mealsRouter
       comments
     };
 
-    for (const [key, value] of Object.entries(newMeal))
-      if (value == null)
+    for (const [key, value] of Object.entries(newMeal)) {
+      if (value == null) {
         return res.status(400).json({
           error: { message: `missing ${key} in request body` }
         });
-    MealsService.insertMeal(req.app.get("db"), newMeal)
+      }
+    }
+
+    let mealToSave = {};
+    // remove empty fields from DB object
+    for (const [key, value] of Object.entries(newMeal)) {
+      if (value) {
+        mealToSave[key] = value;
+      }
+    }
+
+    MealsService.insertMeal(req.app.get("db"), mealToSave)
       .then(meal => {
         res
           .status(201)

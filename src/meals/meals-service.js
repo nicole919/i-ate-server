@@ -1,8 +1,16 @@
+const moment = require("moment");
+
 const MealsService = {
   getAllMeals(knex) {
-    return knex.select("*").from("meals");
+    return knex
+      .select("*")
+      .from("meals")
+      .orderBy("date_went", "desc");
   },
   insertMeal(knex, newMeal) {
+    newMeal.date_went = moment(newMeal.date_went).isValid()
+      ? newMeal.date_went
+      : moment().format("MMM D, YYYY");
     return knex
       .insert(newMeal)
       .into("meals")
