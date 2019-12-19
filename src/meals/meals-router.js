@@ -2,7 +2,6 @@ const path = require("path");
 const express = require("express");
 const MealsService = require("./meals-service");
 
-//const requireAuth
 const mealsRouter = express.Router();
 const jsonParser = express.json();
 
