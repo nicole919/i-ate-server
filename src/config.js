@@ -4,9 +4,7 @@ module.exports = {
   DATABASE_URL:
     process.env.DATABASE_URL ||
     "postgresql://dunder_mifflin:1234@localhost/i-ate",
-  TEST_DB_URL:
+  TEST_DATABASE_URL:
     process.env.TEST_DATABASE_URL ||
     "postgresql://dunder_mifflin:1234@localhost/i-ate-test"
 };
-
-//https://whispering-waters-19074.herokuapp.com/
